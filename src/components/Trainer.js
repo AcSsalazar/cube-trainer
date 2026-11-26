@@ -92,5 +92,5 @@ export function createTrainer(container, { rng = Math.random } = {}) {
   });
 
   selectSet(state.set);
-  return { root, next, reveal: () => $('[data-action="reveal"]').click() };
+  return { root, next, selectSet, reveal: () => $('[data-action="reveal"]').click() };
 }
