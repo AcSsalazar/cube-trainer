@@ -8,6 +8,7 @@ import { createTrainer } from './components/Trainer.js';
 import { createTabs } from './components/Tabs.js';
 import { createSession } from './lib/session.js';
 import { registerShortcuts } from './lib/shortcuts.js';
+import { createThemeToggle } from './lib/theme.js';
 
 const app = document.querySelector('#app');
 
@@ -25,6 +26,7 @@ app.innerHTML = `
 const timerView = document.querySelector('#timer-view');
 const trainerView = document.querySelector('#trainer-view');
 const session = createSession();
+createThemeToggle(document.querySelector('.app-header'));
 
 const scramblePanel = createScramblePanel(timerView);
 
