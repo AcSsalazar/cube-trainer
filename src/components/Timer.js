@@ -107,9 +107,10 @@ export function createTimer(container, { onSolve, inspection = false } = {}) {
   }
 
   const isTyping = (e) => e.target.closest?.('input, textarea, select, label');
+  const isHidden = () => Boolean(root.closest('[hidden]'));
 
   window.addEventListener('keydown', (e) => {
-    if (isTyping(e)) return;
+    if (isTyping(e) || isHidden()) return;
     if (e.code === 'Space') {
       e.preventDefault();
       if (!e.repeat) press();
@@ -118,7 +119,7 @@ export function createTimer(container, { onSolve, inspection = false } = {}) {
     }
   });
   window.addEventListener('keyup', (e) => {
-    if (e.code === 'Space' && !isTyping(e)) release();
+    if (e.code === 'Space' && !isTyping(e) && !isHidden()) release();
   });
   root.addEventListener('pointerdown', (e) => {
     if (isTyping(e)) return;
