@@ -3,6 +3,7 @@ import { createScramblePanel } from './components/ScramblePanel.js';
 import { createPuzzleSelector } from './components/PuzzleSelector.js';
 import { createTimer } from './components/Timer.js';
 import { createHistory } from './components/History.js';
+import { createStats } from './components/Stats.js';
 import { createSession } from './lib/session.js';
 
 const app = document.querySelector('#app');
@@ -27,6 +28,11 @@ const timer = createTimer(content, {
   },
 });
 
+const stats = createStats(content, {
+  session,
+  getPuzzle: () => scramblePanel.puzzle,
+});
+
 const history = createHistory(content, {
   session,
   getPuzzle: () => scramblePanel.puzzle,
@@ -37,5 +43,6 @@ const puzzleSelector = createPuzzleSelector(scramblePanel.slot('left'), {
   onSelect: (puzzle) => {
     scramblePanel.setPuzzle(puzzle);
     history.render();
+    stats.render();
   },
 });
