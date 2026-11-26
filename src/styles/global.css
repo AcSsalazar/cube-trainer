@@ -41,3 +41,12 @@ body {
   display: grid;
   gap: 16px;
 }
+
+.app-view {
+  display: grid;
+  gap: 16px;
+}
+
+.app-view[hidden] {
+  display: none;
+}
