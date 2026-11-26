@@ -1,0 +1,35 @@
+import styles from './CubeNet.module.css';
+import { applyAlg, faces, solvedCube } from '../lib/cube.js';
+
+const AREAS = { U: 'u', L: 'l', F: 'f', R: 'r', B: 'b', D: 'd' };
+
+/** Dibuja el cubo desplegado (U arriba, L F R B al centro, D abajo). */
+export function renderNet(cube) {
+  const f = faces(cube);
+  const N = cube.size;
+  return `
+    <div class="${styles.net}" role="img" aria-label="Vista del cubo desplegado">
+      ${Object.entries(AREAS)
+        .map(
+          ([face, area]) => `
+        <div class="${styles.face}" style="grid-area:${area};grid-template-columns:repeat(${N}, var(--cell))">
+          ${f[face]
+            .flat()
+            .map((c) => `<span class="${styles.sticker} ${styles[c]}"></span>`)
+            .join('')}
+        </div>`,
+        )
+        .join('')}
+    </div>`;
+}
+
+export function createCubeNet(container) {
+  const root = document.createElement('div');
+  container.append(root);
+  return {
+    root,
+    show(size, alg) {
+      root.innerHTML = renderNet(applyAlg(solvedCube(size), alg));
+    },
+  };
+}

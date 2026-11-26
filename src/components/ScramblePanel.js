@@ -1,6 +1,7 @@
 import styles from './ScramblePanel.module.css';
-import { generateScramble } from '../lib/scramble.js';
+import { generateScramble, SCRAMBLERS } from '../lib/scramble.js';
 import { revealMoves } from '../lib/animations.js';
+import { createCubeNet } from './CubeNet.js';
 
 export function createScramblePanel(container, { puzzle = '3x3', onChange } = {}) {
   const root = document.createElement('section');
@@ -13,8 +14,11 @@ export function createScramblePanel(container, { puzzle = '3x3', onChange } = {}
       </div>
     </div>
     <p class="${styles.scramble}" aria-live="polite"></p>
+    <div class="${styles.preview}"></div>
   `;
   container.append(root);
+
+  const net = createCubeNet(root.querySelector(`.${styles.preview}`));
 
   const text = root.querySelector(`.${styles.scramble}`);
   const state = { puzzle, scramble: '' };
@@ -25,6 +29,7 @@ export function createScramblePanel(container, { puzzle = '3x3', onChange } = {}
       .map((m) => `<span class="${styles.move}">${m}</span>`)
       .join('');
     revealMoves(text.querySelectorAll(`.${styles.move}`));
+    net.show(SCRAMBLERS[state.puzzle].size, state.scramble);
   }
 
   function next() {
