@@ -7,6 +7,7 @@ import { createStats } from './components/Stats.js';
 import { createTrainer } from './components/Trainer.js';
 import { createTabs } from './components/Tabs.js';
 import { createSession } from './lib/session.js';
+import { registerShortcuts } from './lib/shortcuts.js';
 
 const app = document.querySelector('#app');
 
@@ -59,3 +60,13 @@ const tabs = createTabs(document.querySelector('.app-header'), [
   { id: 'timer', label: 'Cronómetro', panel: timerView },
   { id: 'trainer', label: 'Entrenador', panel: trainerView },
 ]);
+
+const onTimerTab = () => tabs.current === 'timer' && timer.state !== 'running';
+
+registerShortcuts({
+  n: () => (onTimerTab() ? scramblePanel.next() : tabs.current === 'trainer' ? trainer.next() : false),
+  c: () => (onTimerTab() ? scramblePanel.copy() : false),
+  r: () => (tabs.current === 'trainer' ? trainer.reveal() : false),
+  1: () => (onTimerTab() ? puzzleSelector.select('3x3') : false),
+  2: () => (onTimerTab() ? puzzleSelector.select('4x4') : false),
+});

@@ -115,6 +115,7 @@ export function createTimer(container, { onSolve, inspection = false } = {}) {
       e.preventDefault();
       if (!e.repeat) press();
     } else if (state === 'running') {
+      e.preventDefault();
       press();
     }
   });

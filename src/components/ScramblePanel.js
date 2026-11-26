@@ -10,7 +10,8 @@ export function createScramblePanel(container, { puzzle = '3x3', onChange } = {}
     <div class="${styles.toolbar}">
       <div data-slot="left"></div>
       <div data-slot="right">
-        <button type="button" class="${styles.button}" data-action="next">Nuevo scramble</button>
+        <button type="button" class="${styles.button}" data-action="copy">Copiar</button>
+        <button type="button" class="${styles.button}" data-action="next" title="Atajo: N">Nuevo scramble</button>
       </div>
     </div>
     <p class="${styles.scramble}" aria-live="polite"></p>
@@ -39,12 +40,25 @@ export function createScramblePanel(container, { puzzle = '3x3', onChange } = {}
     return state.scramble;
   }
 
+  async function copy() {
+    const btn = root.querySelector('[data-action="copy"]');
+    try {
+      await navigator.clipboard.writeText(state.scramble);
+      btn.textContent = 'Copiado';
+    } catch {
+      btn.textContent = 'No se pudo copiar';
+    }
+    setTimeout(() => (btn.textContent = 'Copiar'), 1500);
+  }
+
   root.querySelector('[data-action="next"]').addEventListener('click', next);
+  root.querySelector('[data-action="copy"]').addEventListener('click', copy);
   next();
 
   return {
     root,
     next,
+    copy,
     get scramble() {
       return state.scramble;
     },
