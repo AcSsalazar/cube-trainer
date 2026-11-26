@@ -17,9 +17,15 @@ Hecho con HTML, JavaScript, CSS Modules y GSAP, sobre Vite.
 
 **Entrenador**
 
-- PLL (21 casos), OLL en dos pasos (10 casos) y paridades de 4x4.
+- F2L básico, OLL en dos pasos, PLL en dos pasos, PLL completo (21 casos) y paridades de 4x4.
 - Muestra un caso al azar con amarillo arriba y la secuencia para armarlo.
 - La solución se revela al pedirla.
+
+**Manual**
+
+- Guía del método Fridrich (CFOP) completo y reducido (2-look), etapa por etapa.
+- Cada etapa muestra el objetivo en el cubo, consejos, sus algoritmos y un botón para practicarlos.
+- Incluye cómo aplicar el método al 4x4 por reducción.
 
 ## Atajos de teclado
 
