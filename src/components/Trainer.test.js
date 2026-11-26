@@ -15,6 +15,8 @@ describe('entrenador', () => {
 
   it('cada set indica el tamaño de cubo correcto', () => {
     expect(SETS.pll.size).toBe(3);
+    expect(SETS.pll2.size).toBe(3);
+    expect(SETS.f2l.size).toBe(3);
     expect(SETS.oll.size).toBe(3);
     expect(SETS.parity.size).toBe(4);
   });

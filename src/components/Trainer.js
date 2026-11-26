@@ -1,14 +1,17 @@
 import styles from './Trainer.module.css';
-import { PLL } from '../data/pll.js';
+import { PLL, PLL_2LOOK } from '../data/pll.js';
 import { OLL } from '../data/oll.js';
 import { PARITY_4X4 } from '../data/parity.js';
+import { F2L_BASIC } from '../data/f2l.js';
 import { invertAlg } from '../lib/moves.js';
 import { createCubeNet } from './CubeNet.js';
 import { fadeIn } from '../lib/animations.js';
 
 export const SETS = {
-  pll: { label: 'PLL', size: 3, cases: PLL },
+  f2l: { label: 'F2L básico', size: 3, cases: F2L_BASIC },
   oll: { label: 'OLL 2 pasos', size: 3, cases: OLL },
+  pll2: { label: 'PLL 2 pasos', size: 3, cases: PLL_2LOOK },
+  pll: { label: 'PLL', size: 3, cases: PLL },
   parity: { label: 'Paridad 4x4', size: 4, cases: PARITY_4X4 },
 };
 
