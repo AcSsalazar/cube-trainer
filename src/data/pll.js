@@ -22,3 +22,15 @@ export const PLL = [
   { name: 'Gc', group: 'G', alg: "R2 U' R U' R U R' U R2 U D' R U' R' D" },
   { name: 'Gd', group: 'G', alg: "R U R' U' D R2 U' R U' R' U R' U R2 D'" },
 ];
+
+// PLL en dos pasos: primero esquinas (T o Y), luego aristas (Ua, Ub, H, Z).
+const byName = (name) => PLL.find((p) => p.name === name);
+
+export const PLL_2LOOK = [
+  { ...byName('T'), group: 'Esquinas', note: 'Hay faros en un solo lado: ponlos a la izquierda.' },
+  { ...byName('Y'), group: 'Esquinas', note: 'No hay faros en ningún lado.' },
+  { ...byName('Ua'), group: 'Aristas', note: 'Un lado resuelto atrás; tres aristas giran entre sí.' },
+  { ...byName('Ub'), group: 'Aristas', note: 'Un lado resuelto atrás; tres aristas giran en el otro sentido.' },
+  { ...byName('H'), group: 'Aristas', note: 'Se intercambian aristas opuestas.' },
+  { ...byName('Z'), group: 'Aristas', note: 'Se intercambian aristas vecinas.' },
+];
