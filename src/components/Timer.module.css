@@ -32,6 +32,21 @@
   color: #1f9d55;
 }
 
-.running .hint {
+.running .hint,
+.running .option {
   visibility: hidden;
+}
+
+.inspecting .display {
+  color: #d98a1f;
+}
+
+.option {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  cursor: pointer;
 }
