@@ -1,5 +1,5 @@
 import styles from './CubeNet.module.css';
-import { applyAlg, faces, solvedCube } from '../lib/cube.js';
+import { applyAlg, faces, maskCube, solvedCube } from '../lib/cube.js';
 
 const AREAS = { U: 'u', L: 'l', F: 'f', R: 'r', B: 'b', D: 'd' };
 
@@ -28,8 +28,11 @@ export function createCubeNet(container) {
   container.append(root);
   return {
     root,
-    show(size, alg) {
-      root.innerHTML = renderNet(applyAlg(solvedCube(size), alg));
+    /** mask (opcional): filtro de stickers visibles; el resto se ve gris. */
+    show(size, alg, mask) {
+      const cube = solvedCube(size);
+      if (mask) maskCube(cube, mask);
+      root.innerHTML = renderNet(applyAlg(cube, alg));
     },
   };
 }

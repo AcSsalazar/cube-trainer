@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { applyAlg, faces, isSolved, solvedCube } from './cube.js';
+import { applyAlg, faces, isSolved, maskCube, solvedCube, STAGES } from './cube.js';
 import { invertAlg } from './moves.js';
 import { generateScramble } from './scramble.js';
 
@@ -78,5 +78,30 @@ describe.each([
     const counts = {};
     for (const grid of Object.values(f)) for (const r of grid) for (const c of r) counts[c] = (counts[c] ?? 0) + 1;
     expect(Object.values(counts)).toEqual(Array(6).fill(size * size));
+  });
+});
+
+describe('etapas de Fridrich', () => {
+  const count = (stage) => {
+    const f = faces(applyAlg(maskCube(solvedCube(3), STAGES[stage]), 'z2'));
+    const all = Object.values(f).flat(2);
+    return { shown: all.filter((c) => c !== 'X').length, f };
+  };
+
+  it('la cruz muestra centros y las 4 aristas de la base', () => {
+    const { shown, f } = count('cross');
+    expect(shown).toBe(6 + 8);
+    expect(f.D[0][1]).toBe('U');
+    expect(f.D[0][0]).toBe('X');
+  });
+
+  it('F2L muestra las dos capas de abajo', () => {
+    expect(count('f2l').shown).toBe(9 + 24 + 1);
+  });
+
+  it('OLL agrega la cara amarilla completa arriba', () => {
+    const { shown, f } = count('oll');
+    expect(shown).toBe(9 + 24 + 9);
+    expect(f.U.flat().every((c) => c === 'D')).toBe(true);
   });
 });
