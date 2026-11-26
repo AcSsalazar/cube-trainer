@@ -1,6 +1,7 @@
 import './styles/global.css';
 import { createScramblePanel } from './components/ScramblePanel.js';
 import { createPuzzleSelector } from './components/PuzzleSelector.js';
+import { createTimer } from './components/Timer.js';
 
 const app = document.querySelector('#app');
 
@@ -19,4 +20,8 @@ const scramblePanel = createScramblePanel(content);
 const puzzleSelector = createPuzzleSelector(scramblePanel.slot('left'), {
   value: scramblePanel.puzzle,
   onSelect: (puzzle) => scramblePanel.setPuzzle(puzzle),
+});
+
+const timer = createTimer(content, {
+  onSolve: () => scramblePanel.next(),
 });
