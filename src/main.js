@@ -6,6 +6,7 @@ import { createHistory } from './components/History.js';
 import { createStats } from './components/Stats.js';
 import { createTrainer } from './components/Trainer.js';
 import { createTabs } from './components/Tabs.js';
+import { createManual } from './components/Manual.js';
 import { createSession } from './lib/session.js';
 import { registerShortcuts } from './lib/shortcuts.js';
 import { createThemeToggle } from './lib/theme.js';
@@ -20,6 +21,7 @@ app.innerHTML = `
   <main class="app-main">
     <section id="timer-view" class="app-view"></section>
     <section id="trainer-view" class="app-view"></section>
+    <section id="manual-view" class="app-view"></section>
   </main>
 `;
 
@@ -58,9 +60,18 @@ const puzzleSelector = createPuzzleSelector(scramblePanel.slot('left'), {
 
 const trainer = createTrainer(trainerView);
 
+const manual = createManual(document.querySelector('#manual-view'), {
+  onTrain: (set) => {
+    tabs.select('trainer');
+    trainer.selectSet(set);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  },
+});
+
 const tabs = createTabs(document.querySelector('.app-header'), [
   { id: 'timer', label: 'Cronómetro', panel: timerView },
   { id: 'trainer', label: 'Entrenador', panel: trainerView },
+  { id: 'manual', label: 'Manual', panel: document.querySelector('#manual-view') },
 ]);
 
 const onTimerTab = () => tabs.current === 'timer' && timer.state !== 'running';
