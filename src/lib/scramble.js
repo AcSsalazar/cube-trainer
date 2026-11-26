@@ -34,6 +34,12 @@ export const SCRAMBLERS = {
     size: 3,
     generate: (rng) => randomMoveSequence(['U', 'D', 'R', 'L', 'F', 'B'], 20, rng),
   },
+  '4x4': {
+    label: '4x4',
+    size: 4,
+    generate: (rng) =>
+      randomMoveSequence(['U', 'D', 'R', 'L', 'F', 'B', 'Uw', 'Rw', 'Fw'], 40, rng),
+  },
 };
 
 export function generateScramble(puzzle = '3x3', rng = Math.random) {
