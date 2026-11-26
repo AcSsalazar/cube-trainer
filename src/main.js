@@ -17,6 +17,7 @@ app.innerHTML = `
   <header class="app-header">
     <h1>Cube Trainer</h1>
     <p>Scrambles y algoritmos para 3x3 y 4x4</p>
+    <p class="date">${new Date().toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
   </header>
   <main class="app-main">
     <section id="timer-view" class="app-view"></section>

@@ -1,26 +1,28 @@
 import gsap from 'gsap';
 
+// Animaciones sobrias: solo fundidos cortos, sin rebotes ni escalas.
+
 const reduceMotion = () =>
   typeof window !== 'undefined' &&
   window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
-/** Muestra los movimientos del scramble uno tras otro. */
+/** Muestra los movimientos del scramble con un fundido breve. */
 export function revealMoves(elements) {
   if (reduceMotion() || !elements.length) return;
   gsap.fromTo(
     elements,
-    { autoAlpha: 0, y: 10, scale: 0.9 },
-    { autoAlpha: 1, y: 0, scale: 1, duration: 0.35, ease: 'back.out(2)', stagger: 0.025 },
+    { autoAlpha: 0 },
+    { autoAlpha: 1, duration: 0.25, ease: 'power1.out', stagger: 0.012 },
   );
 }
 
-/** Pequeño salto para destacar un valor que cambió. */
+/** Marca discretamente un valor que cambió. */
 export function pop(element) {
   if (reduceMotion() || !element) return;
-  gsap.fromTo(element, { scale: 1.12 }, { scale: 1, duration: 0.4, ease: 'elastic.out(1, 0.5)' });
+  gsap.fromTo(element, { autoAlpha: 0.35 }, { autoAlpha: 1, duration: 0.3, ease: 'power1.out' });
 }
 
 export function fadeIn(element) {
   if (reduceMotion() || !element) return;
-  gsap.fromTo(element, { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+  gsap.fromTo(element, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.25, ease: 'power1.out' });
 }

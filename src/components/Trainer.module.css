@@ -1,13 +1,9 @@
 .trainer {
   display: grid;
-  gap: 16px;
+  gap: 28px;
 }
 
 .card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
   display: grid;
   gap: 16px;
   justify-items: center;
@@ -17,50 +13,58 @@
 .sets {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 4px 0;
   justify-content: center;
 }
 
 .set {
-  border: 1px solid var(--border);
-  background: var(--surface);
+  border: 0;
+  background: none;
   color: var(--muted);
-  border-radius: 999px;
-  padding: 6px 14px;
   font: inherit;
+  padding: 0 12px;
   cursor: pointer;
 }
 
+.set + .set {
+  border-left: 1px solid var(--hairline);
+}
+
+.set:hover {
+  color: var(--text);
+}
+
 .active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
+  color: var(--text);
+  font-weight: 700;
 }
 
 .setup {
   margin: 0;
   color: var(--muted);
   font-size: 0.9rem;
+  font-style: italic;
 }
 
 .setup code,
 .alg {
-  font-family: ui-monospace, Consolas, monospace;
+  font-family: var(--mono);
+  font-style: normal;
 }
 
 .answer {
   min-height: 3.5em;
   display: grid;
-  gap: 4px;
+  gap: 2px;
 }
 
 .name {
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
 }
 
 .alg {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
 }
 
 .hidden {
@@ -69,41 +73,48 @@
 
 .actions {
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
 
 .button {
   border: 1px solid var(--border);
-  background: var(--surface);
+  background: none;
   color: var(--text);
-  border-radius: 8px;
-  padding: 8px 14px;
+  border-radius: 0;
+  padding: 3px 14px;
   font: inherit;
+  font-size: 0.9rem;
   cursor: pointer;
 }
 
-.primary {
-  background: var(--accent);
+.button:hover {
+  color: var(--accent);
   border-color: var(--accent);
-  color: #fff;
 }
 
+.primary {
+  font-weight: 700;
+}
+
+/* Tabla tipo booktabs */
 .list {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 8px 20px;
+  border-top: 1.5px solid var(--border);
+  border-bottom: 1.5px solid var(--border);
 }
 
 .row {
   display: grid;
   grid-template-columns: 7em 1fr;
   gap: 12px;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--border);
+  padding: 4px 6px;
   text-align: left;
 }
 
-.row:last-child {
-  border-bottom: 0;
+.row + .row {
+  border-top: 0.5px solid var(--hairline);
+}
+
+.row strong {
+  font-weight: 400;
+  font-style: italic;
 }

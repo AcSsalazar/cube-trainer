@@ -1,31 +1,35 @@
 .panel {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px;
   display: grid;
-  gap: 16px;
+  gap: 18px;
 }
 
 .toolbar {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
+  border-bottom: 1px solid var(--hairline);
+  padding-bottom: 8px;
+}
+
+.toolbar [data-slot] {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
 }
 
 .scramble {
   margin: 0;
-  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
-  font-size: 1.35rem;
-  line-height: 1.7;
+  font-family: var(--mono);
+  font-size: 1.2rem;
+  line-height: 1.8;
   text-align: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 4px 12px;
-  min-height: 3.4em;
+  gap: 0 0.9em;
+  min-height: 3.6em;
 }
 
 .move {
@@ -34,11 +38,12 @@
 
 .button {
   border: 1px solid var(--border);
-  background: var(--surface);
+  background: none;
   color: var(--text);
-  border-radius: 8px;
-  padding: 8px 14px;
+  border-radius: 0;
+  padding: 2px 12px;
   font: inherit;
+  font-size: 0.9rem;
   cursor: pointer;
 }
 
@@ -50,5 +55,4 @@
 .preview {
   display: flex;
   justify-content: center;
-  padding-top: 4px;
 }

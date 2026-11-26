@@ -47,15 +47,20 @@ export function createManual(container, { onTrain } = {}) {
           const algs = step.algs ?? (step.algsFrom && SETS[step.algsFrom]?.cases) ?? [];
           return `
         <article class="${styles.step}">
-          <header>
-            <h2>${escape(step.title)}</h2>
-            <p class="${styles.goal}">${escape(step.goal)}</p>
-          </header>
-          <div class="${styles.figure}" data-figure="${i}"></div>
+          <h2>${escape(step.title)}</h2>
+          ${step.stage ? '' : `<p class="${styles.goal}">${escape(step.goal)}</p>`}
           <div class="${styles.body}">
             ${step.text.map((p) => `<p>${escape(p)}</p>`).join('')}
             ${step.tips?.length ? `<ul class="${styles.tips}">${step.tips.map((t) => `<li>${escape(t)}</li>`).join('')}</ul>` : ''}
           </div>
+          ${
+            step.stage
+              ? `<figure class="${styles.figure}">
+                  <div data-figure="${i}"></div>
+                  <figcaption class="${styles.caption}">${escape(step.goal)}</figcaption>
+                </figure>`
+              : ''
+          }
           ${algs.length ? `<div class="${styles.algs}">${algRows(algs)}</div>` : ''}
           ${step.note ? `<p class="${styles.note}">${escape(step.note)}</p>` : ''}
           ${step.trainer && SETS[step.trainer] ? `<button type="button" class="${styles.train}" data-train="${step.trainer}">Practicar en el entrenador</button>` : ''}

@@ -23,7 +23,7 @@ export function createThemeToggle(container) {
 
   function apply() {
     document.documentElement.dataset.theme = theme;
-    button.textContent = theme === 'dark' ? 'Tema claro' : 'Tema oscuro';
+    button.textContent = theme === 'dark' ? 'modo claro' : 'modo oscuro';
   }
 
   button.addEventListener('click', () => {
