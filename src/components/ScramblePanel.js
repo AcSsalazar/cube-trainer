@@ -1,5 +1,6 @@
 import styles from './ScramblePanel.module.css';
 import { generateScramble } from '../lib/scramble.js';
+import { revealMoves } from '../lib/animations.js';
 
 export function createScramblePanel(container, { puzzle = '3x3', onChange } = {}) {
   const root = document.createElement('section');
@@ -23,6 +24,7 @@ export function createScramblePanel(container, { puzzle = '3x3', onChange } = {}
       .split(' ')
       .map((m) => `<span class="${styles.move}">${m}</span>`)
       .join('');
+    revealMoves(text.querySelectorAll(`.${styles.move}`));
   }
 
   function next() {
