@@ -105,3 +105,21 @@ export function isSolved(cube) {
     return grid.every((row) => row.every((c) => c === first));
   });
 }
+
+/** Pinta de gris ('X') los stickers cuyo filtro devuelve false. */
+export function maskCube(cube, keep) {
+  for (const s of cube.stickers) if (!keep(s)) s.color = 'X';
+  return cube;
+}
+
+const isCenter = (s) => s.pos.filter((c) => c === 0).length === 2;
+const isEdge = (s) => s.pos.filter((c) => c === 0).length === 1;
+
+// Etapas del método Fridrich sobre un 3x3 resuelto con blanco (U) arriba.
+// Para mostrarlas como se resuelven (blanco abajo) se aplica luego z2.
+export const STAGES = {
+  cross: (s) => isCenter(s) || (s.pos[1] === 2 && isEdge(s)),
+  f2l: (s) => isCenter(s) || s.pos[1] >= 0,
+  oll: (s) => s.pos[1] >= 0 || isCenter(s) || s.color === 'D',
+  solved: () => true,
+};
