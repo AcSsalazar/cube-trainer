@@ -1,4 +1,5 @@
 import './styles/global.css';
+import { createScramblePanel } from './components/ScramblePanel.js';
 
 const app = document.querySelector('#app');
 
@@ -9,3 +10,7 @@ app.innerHTML = `
   </header>
   <main id="content" class="app-main"></main>
 `;
+
+const content = document.querySelector('#content');
+
+const scramblePanel = createScramblePanel(content);
