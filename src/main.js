@@ -2,6 +2,8 @@ import './styles/global.css';
 import { createScramblePanel } from './components/ScramblePanel.js';
 import { createPuzzleSelector } from './components/PuzzleSelector.js';
 import { createTimer } from './components/Timer.js';
+import { createHistory } from './components/History.js';
+import { createSession } from './lib/session.js';
 
 const app = document.querySelector('#app');
 
@@ -14,14 +16,26 @@ app.innerHTML = `
 `;
 
 const content = document.querySelector('#content');
+const session = createSession();
 
 const scramblePanel = createScramblePanel(content);
 
-const puzzleSelector = createPuzzleSelector(scramblePanel.slot('left'), {
-  value: scramblePanel.puzzle,
-  onSelect: (puzzle) => scramblePanel.setPuzzle(puzzle),
+const timer = createTimer(content, {
+  onSolve: (ms, penalty) => {
+    session.add({ ms, penalty, puzzle: scramblePanel.puzzle, scramble: scramblePanel.scramble });
+    scramblePanel.next();
+  },
 });
 
-const timer = createTimer(content, {
-  onSolve: () => scramblePanel.next(),
+const history = createHistory(content, {
+  session,
+  getPuzzle: () => scramblePanel.puzzle,
+});
+
+const puzzleSelector = createPuzzleSelector(scramblePanel.slot('left'), {
+  value: scramblePanel.puzzle,
+  onSelect: (puzzle) => {
+    scramblePanel.setPuzzle(puzzle);
+    history.render();
+  },
 });
