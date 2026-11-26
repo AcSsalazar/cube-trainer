@@ -1,8 +1,5 @@
 .timer {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 32px 16px;
+  padding: 8px 16px 0;
   text-align: center;
   user-select: none;
   touch-action: none;
@@ -10,26 +7,27 @@
 }
 
 .display {
-  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
-  font-size: clamp(3.5rem, 14vw, 6.5rem);
-  font-weight: 700;
+  font-family: var(--serif);
+  font-size: clamp(3.5rem, 15vw, 6.5rem);
+  font-weight: 400;
   font-variant-numeric: tabular-nums;
   line-height: 1;
   transition: color 0.15s;
 }
 
 .hint {
-  margin: 12px 0 0;
+  margin: 14px 0 0;
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  font-style: italic;
 }
 
 .holding .display {
-  color: #d93a3a;
+  color: #a8323e;
 }
 
 .ready .display {
-  color: #1f9d55;
+  color: #2f7a4b;
 }
 
 .running .hint,
@@ -38,15 +36,19 @@
 }
 
 .inspecting .display {
-  color: #d98a1f;
+  color: #b5651d;
 }
 
 .option {
   display: inline-flex;
   gap: 6px;
   align-items: center;
-  margin-top: 12px;
+  margin-top: 8px;
   color: var(--muted);
   font-size: 0.9rem;
   cursor: pointer;
+}
+
+.option input {
+  accent-color: var(--text);
 }

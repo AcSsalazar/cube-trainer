@@ -32,7 +32,7 @@ export function createHistory(container, { session, getPuzzle }) {
           <span class="${styles.actions}">
             <button type="button" class="${styles.small} ${s.penalty === '+2' ? styles.on : ''}" data-action="plus2">+2</button>
             <button type="button" class="${styles.small} ${s.penalty === 'DNF' ? styles.on : ''}" data-action="dnf">DNF</button>
-            <button type="button" class="${styles.small}" data-action="remove" aria-label="Eliminar">x</button>
+            <button type="button" class="${styles.small}" data-action="remove" aria-label="Eliminar">borrar</button>
           </span>
         </li>`,
       )

@@ -1,27 +1,29 @@
+/* Como una tabla booktabs: regla gruesa arriba y abajo, sin cajas. */
 .stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  border-top: 1.5px solid var(--border);
+  border-bottom: 1.5px solid var(--border);
+  padding: 4px 0;
 }
 
 .card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 12px 14px;
+  padding: 6px 10px;
+  text-align: center;
 }
 
 .label {
+  display: block;
   color: var(--muted);
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  font-size: 0.85rem;
+  font-style: italic;
+  border-bottom: 0.5px solid var(--hairline);
+  padding-bottom: 4px;
 }
 
 .value {
   display: block;
   margin-top: 4px;
-  font-family: ui-monospace, Consolas, monospace;
-  font-size: 1.3rem;
-  font-weight: 700;
+  font-size: 1.2rem;
+  font-variant-numeric: tabular-nums;
 }
