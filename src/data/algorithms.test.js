@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { applyAlg, faces, isSolved, solvedCube } from '../lib/cube.js';
 import { PLL } from './pll.js';
 import { OLL } from './oll.js';
+import { PARITY_4X4 } from './parity.js';
 
 // Reorienta el cubo con rotaciones y para comparar sin importar si el
 // algoritmo terminó con una rotación del cubo completo.
@@ -43,5 +44,26 @@ describe('OLL', () => {
     }
     // Debe desorientar la cara superior (si no, no sería un caso de OLL).
     expect(sameColor(f.U.flat(), 'U')).toBe(false);
+  });
+});
+
+describe('paridades 4x4', () => {
+  const centers = (grid) => [grid[1][1], grid[1][2], grid[2][1], grid[2][2]];
+
+  it.each(PARITY_4X4.map((p) => [p.name, p.alg]))('%s conserva centros y primeras capas', (_, alg) => {
+    const f = faces(applyAlg(solvedCube(4), alg));
+    expect(sameColor(f.D.flat(), 'D')).toBe(true);
+    for (const face of ['U', 'F', 'R', 'B', 'L']) {
+      expect(sameColor(centers(f[face]), face)).toBe(true);
+    }
+    for (const side of ['F', 'R', 'B', 'L']) {
+      expect(sameColor(f[side].slice(1).flat(), side)).toBe(true);
+    }
+    expect(isSolved(applyAlg(solvedCube(4), alg))).toBe(false);
+  });
+
+  it('la paridad PLL deja la cara superior orientada', () => {
+    const f = faces(applyAlg(solvedCube(4), PARITY_4X4[1].alg));
+    expect(sameColor(f.U.flat(), 'U')).toBe(true);
   });
 });
